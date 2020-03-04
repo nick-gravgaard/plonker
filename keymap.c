@@ -32,17 +32,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NUMBERS] = LAYOUT_planck_grid(
-    _______,     KC_F1,       KC_F2,       KC_F3,       KC_F4,       KC_F5,       KC_F6,       KC_F7,       KC_F8,       KC_F9,       KC_F10,      KC_F11,
-    KC_0,        KC_1,        KC_2,        KC_3,        KC_4,        KC_5,        KC_6,        KC_7,        KC_8,        KC_9,        KC_0,        KC_F12,
-    LGUI(KC_0),  LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),  LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  LGUI(KC_0),  XXXXXXX,
-    XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,/***/XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX
+    _______,  KC_F1,       KC_F2,       KC_F3,       KC_F4,       KC_F5,       KC_F6,       KC_F7,       KC_F8,       KC_F9,       KC_F10,      KC_F11,
+    _______,  KC_1,        KC_2,        KC_3,        KC_4,        KC_5,        KC_6,        KC_7,        KC_8,        KC_9,        KC_0,        KC_F12,
+    _______,  LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),  LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  LGUI(KC_0),  XXXXXXX,
+    _______,  _______,     _______,     XXXXXXX,     XXXXXXX,     XXXXXXX,/***/XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX
   ),
 
   [_SYMBOLS_AND_NAV] = LAYOUT_planck_grid(
-    XXXXXXX,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,  UK_PIPE,   XXXXXXX,          KC_PERC,    KC_DELETE,
+    _______,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,  UK_PIPE,   XXXXXXX,          KC_PERC,    KC_DELETE,
     _______,  KC_AMPR,      KC_ASTR,  KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,  XXXXXXX,   UK_PND,           XXXXXXX,    KC_GRAVE,
-    XXXXXXX,  XXXXXXX,      XXXXXXX,  KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,  KC_SLASH,  KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
-    XXXXXXX,  XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        KC_LPRN,  KC_RPRN,   KC_HOME,          KC_PGDOWN,  KC_END
+    _______,  XXXXXXX,      XXXXXXX,  KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,  KC_SLASH,  KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
+    _______,  _______,      _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        KC_LPRN,  KC_RPRN,   KC_HOME,          KC_PGDOWN,  KC_END
   ),
 
   [_ADJUST] = LAYOUT_planck_grid(
