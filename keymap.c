@@ -7,28 +7,40 @@
 
 enum planck_keycodes {
   RGB_SLD = EZ_SAFE_RANGE,
-  QUOTES
 };
 
 enum planck_layers {
   _BASE,
+  _SHIFT,
   _NUMBERS,
   _SYMBOLS_AND_NAV,
   _ADJUST,
-  _NAV,
 };
 
-#define UNSHIFTED_UK_DQUO KC_2
+#define ESCAPE_OR_NUMBERS  LT(_NUMBERS, KC_ESCAPE)
+#define TAB_OR_SYMBOLS     LT(_SYMBOLS_AND_NAV, KC_TAB)
+#define SHIFT_LAYER        LM(_SHIFT, MOD_LSFT)
 
-#define ESCAPE_OR_NUMBERS LT(_NUMBERS, KC_ESCAPE)
-#define TAB_OR_SYMBOLS    LT(_SYMBOLS_AND_NAV, KC_TAB)
+#define L_ROUND_BRACKET     KC_LEFT_PAREN
+#define R_ROUND_BRACKET     KC_RIGHT_PAREN
+#define L_SQUARE_BRACKET    KC_LBRACKET
+#define R_SQUARE_BRACKET    KC_RBRACKET
+#define L_SQUIGGLY_BRACKET  KC_LEFT_CURLY_BRACE
+#define R_SQUIGGLY_BRACKET  KC_RIGHT_CURLY_BRACE
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-    ESCAPE_OR_NUMBERS,  KC_Q,     KC_W,     KC_E,      KC_R,      KC_T,        KC_Y,     KC_U,         KC_I,         KC_O,     KC_P,       KC_BSPACE,
-    TAB_OR_SYMBOLS,     KC_A,     KC_S,     KC_D,      KC_F,      KC_G,        KC_H,     KC_J,         KC_K,         KC_L,     KC_SCOLON,  QUOTES,
-    KC_LSHIFT,          KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,        KC_N,     KC_M,         KC_COMMA,     KC_DOT,   KC_UP,      KC_ENTER,
-    KC_LCTRL,           KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,  KC_SPACE,/**/XXXXXXX,  KC_LBRACKET,  KC_RBRACKET,  KC_LEFT,  KC_DOWN,    KC_RIGHT
+    ESCAPE_OR_NUMBERS,  KC_Q,     KC_W,     KC_E,      KC_R,      KC_T,        KC_Y,     KC_U,             KC_I,             KC_O,     KC_P,       KC_BSPACE,
+    TAB_OR_SYMBOLS,     KC_A,     KC_S,     KC_D,      KC_F,      KC_G,        KC_H,     KC_J,             KC_K,             KC_L,     KC_SCOLON,  UK_QUOT,
+    SHIFT_LAYER,        KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,        KC_N,     KC_M,             KC_COMMA,         KC_DOT,   KC_UP,      KC_ENTER,
+    KC_LCTRL,           KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,  KC_SPACE,/**/XXXXXXX,  L_ROUND_BRACKET,  R_ROUND_BRACKET,  KC_LEFT,  KC_DOWN,    KC_RIGHT
+  ),
+
+  [_SHIFT] = LAYOUT_planck_grid(
+    _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  _______,
+    _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  UK_DQUO,
+    _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  _______,
+    _______,  _______,  _______,  _______,  _______,  _______,/**/XXXXXXX,  L_SQUIGGLY_BRACKET,  R_SQUIGGLY_BRACKET,  _______,  _______,  _______
   ),
 
   [_NUMBERS] = LAYOUT_planck_grid(
@@ -39,10 +51,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SYMBOLS_AND_NAV] = LAYOUT_planck_grid(
-    _______,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,  UK_PIPE,   XXXXXXX,          KC_PERC,    KC_DELETE,
-    _______,  KC_AMPR,      KC_ASTR,  KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,  XXXXXXX,   UK_PND,           XXXXXXX,    KC_GRAVE,
-    _______,  XXXXXXX,      XXXXXXX,  KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,  KC_SLASH,  KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
-    _______,  _______,      _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        KC_LPRN,  KC_RPRN,   KC_HOME,          KC_PGDOWN,  KC_END
+    _______,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,           UK_PIPE,           XXXXXXX,          KC_PERC,    KC_DELETE,
+    _______,  KC_AMPR,      KC_ASTR,  KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,           XXXXXXX,           UK_PND,           XXXXXXX,    KC_GRAVE,
+    _______,  XXXXXXX,      XXXXXXX,  KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,           KC_SLASH,          KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
+    _______,  _______,      _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        L_SQUARE_BRACKET,  R_SQUARE_BRACKET,  KC_HOME,          KC_PGDOWN,  KC_END
   ),
 
   [_ADJUST] = LAYOUT_planck_grid(
@@ -54,28 +66,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-//bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//  switch (keycode) {
-//  }
-//  return true;
-//}
-
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QUOTES: {
-      static uint16_t kc;
-      if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_SHIFT) {
-          kc = UNSHIFTED_UK_DQUO;
-        } else {
-          kc = UK_QUOT;
-        }
-        register_code(kc);
-      } else {
-        unregister_code(kc);
-      }
-    }
   }
   return true;
 }
