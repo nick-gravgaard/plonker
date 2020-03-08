@@ -12,14 +12,21 @@ enum planck_keycodes {
 enum planck_layers {
   _BASE,
   _SHIFT,
+  _NAV,
+  _SYMBOLS,
   _NUMBERS,
-  _SYMBOLS_AND_NAV,
+  _JUMP,
+  _FUNCTION,
   _ADJUST,
 };
 
-#define ESCAPE_OR_NUMBERS  LT(_NUMBERS, KC_ESCAPE)
-#define TAB_OR_SYMBOLS     LT(_SYMBOLS_AND_NAV, KC_TAB)
-#define SHIFT_LAYER        LM(_SHIFT, MOD_LSFT)
+#define ESCAPE_OR_NAV   LT(_NAV, KC_ESCAPE)
+#define SPACE_OR_NAV    LT(_NAV, KC_SPACE)
+#define TAB_OR_SYMBOLS  LT(_SYMBOLS, KC_TAB)
+#define F_OR_FUNCTION   LT(_FUNCTION, KC_F)
+#define J_OR_JUMP       LT(_JUMP, KC_J)
+#define N_OR_NUMBERS    LT(_NUMBERS, KC_N)
+#define SHIFT_LAYER     LM(_SHIFT, MOD_LSFT)
 
 #define L_ROUND_BRACKET     KC_LEFT_PAREN
 #define R_ROUND_BRACKET     KC_RIGHT_PAREN
@@ -30,10 +37,10 @@ enum planck_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-    ESCAPE_OR_NUMBERS,  KC_Q,     KC_W,     KC_E,      KC_R,      KC_T,        KC_Y,     KC_U,             KC_I,             KC_O,     KC_P,       KC_BSPACE,
-    TAB_OR_SYMBOLS,     KC_A,     KC_S,     KC_D,      KC_F,      KC_G,        KC_H,     KC_J,             KC_K,             KC_L,     KC_SCOLON,  UK_QUOT,
-    SHIFT_LAYER,        KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,        KC_N,     KC_M,             KC_COMMA,         KC_DOT,   KC_UP,      KC_ENTER,
-    KC_LCTRL,           KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,  KC_SPACE,/**/XXXXXXX,  L_ROUND_BRACKET,  R_ROUND_BRACKET,  KC_LEFT,  KC_DOWN,    KC_RIGHT
+    ESCAPE_OR_NAV,   KC_Q,     KC_W,     KC_E,      KC_R,          KC_T,            KC_Y,          KC_U,             KC_I,             KC_O,     KC_P,       KC_BSPACE,
+    TAB_OR_SYMBOLS,  KC_A,     KC_S,     KC_D,      F_OR_FUNCTION, KC_G,            KC_H,          J_OR_JUMP,        KC_K,             KC_L,     KC_SCOLON,  UK_QUOT,
+    SHIFT_LAYER,     KC_Z,     KC_X,     KC_C,      KC_V,          KC_B,            N_OR_NUMBERS,  KC_M,             KC_COMMA,         KC_DOT,   KC_UP,      KC_ENTER,
+    KC_LCTRL,        KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,      SPACE_OR_NAV,/**/XXXXXXX,       L_ROUND_BRACKET,  R_ROUND_BRACKET,  KC_LEFT,  KC_DOWN,    KC_RIGHT
   ),
 
   [_SHIFT] = LAYOUT_planck_grid(
@@ -43,18 +50,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______,  _______,  _______,  _______,  _______,/**/XXXXXXX,  L_SQUIGGLY_BRACKET,  R_SQUIGGLY_BRACKET,  _______,  _______,  _______
   ),
 
-  [_NUMBERS] = LAYOUT_planck_grid(
-    _______,  KC_F1,       KC_F2,       KC_F3,       KC_F4,       KC_F5,       KC_F6,       KC_F7,       KC_F8,       KC_F9,       KC_F10,      KC_F11,
-    _______,  KC_1,        KC_2,        KC_3,        KC_4,        KC_5,        KC_6,        KC_7,        KC_8,        KC_9,        KC_0,        KC_F12,
-    _______,  LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),  LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  LGUI(KC_0),  XXXXXXX,
-    _______,  _______,     _______,     XXXXXXX,     XXXXXXX,     XXXXXXX,/***/XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX
+  [_NAV] = LAYOUT_planck_grid(
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGUP,    KC_BSPACE,  KC_UP,    KC_DELETE,  XXXXXXX,  XXXXXXX,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGDOWN,  KC_LEFT,    KC_DOWN,  KC_RIGHT,   XXXXXXX,  XXXXXXX,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,    KC_HOME,    XXXXXXX,  KC_END,     XXXXXXX,  XXXXXXX,
+    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,/**/XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
   ),
 
-  [_SYMBOLS_AND_NAV] = LAYOUT_planck_grid(
-    _______,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,           UK_PIPE,           XXXXXXX,          KC_PERC,    KC_DELETE,
+
+  [_SYMBOLS] = LAYOUT_planck_grid(
+    _______,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,           UK_PIPE,           XXXXXXX,          KC_PERC,    XXXXXXX,
     _______,  KC_AMPR,      KC_ASTR,  KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,           XXXXXXX,           UK_PND,           XXXXXXX,    KC_GRAVE,
     _______,  XXXXXXX,      XXXXXXX,  KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,           KC_SLASH,          KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
     _______,  _______,      _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        L_SQUARE_BRACKET,  R_SQUARE_BRACKET,  KC_HOME,          KC_PGDOWN,  KC_END
+  ),
+
+  [_NUMBERS] = LAYOUT_planck_grid(
+    KC_0,     KC_1,     KC_2,     KC_3,     XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  KC_0,     KC_1,     KC_2,     KC_3,
+    _______,  KC_4,     KC_5,     KC_6,     XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_4,     KC_5,     KC_6,
+    _______,  KC_7,     KC_8,     KC_9,     XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_7,     KC_8,     KC_9,
+    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+  ),
+
+  [_JUMP] = LAYOUT_planck_grid(
+    LGUI(KC_0),  LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  LGUI(KC_0),  LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),
+    _______,     LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),
+    _______,     LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),
+    _______,     _______,     _______,     XXXXXXX,     XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX
+  ),
+
+  [_FUNCTION] = LAYOUT_planck_grid(
+    _______,  KC_F1,   KC_F2,   KC_F3,   XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_F1,   KC_F2,   KC_F3,
+    _______,  KC_F4,   KC_F5,   KC_F6,   XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_F4,   KC_F5,   KC_F6,
+    _______,  KC_F7,   KC_F8,   KC_F9,   XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_F7,   KC_F8,   KC_F9,
+    _______,  KC_F10,  KC_F11,  KC_F12,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_F10,  KC_F11,  KC_F12
   ),
 
   [_ADJUST] = LAYOUT_planck_grid(
@@ -73,8 +102,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // define raise/lower layers so template code below works unchanged
-#define _LOWER _NUMBERS
-#define _RAISE _SYMBOLS_AND_NAV
+#define _LOWER _NAV
+#define _RAISE _SYMBOLS
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 
