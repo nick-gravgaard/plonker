@@ -27,7 +27,7 @@ enum planck_layers {
 #define F_OR_FUNCTION   LT(_FUNCTION, KC_F)
 #define J_OR_JUMP       LT(_JUMP, KC_J)
 #define N_OR_NUMBERS    LT(_NUMBERS, KC_N)
-#define BSPACE_OR_DEL   LT(_DELETE, KC_BSPACE)
+#define P_OR_DEL        LT(_DELETE, KC_P)
 #define SHIFT_LAYER     LM(_SHIFT, MOD_LSFT)
 
 #define L_ROUND_BRACKET     KC_LEFT_PAREN
@@ -39,7 +39,7 @@ enum planck_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-    ESCAPE_OR_NAV,   KC_Q,     KC_W,     KC_E,      KC_R,          KC_T,            KC_Y,          KC_U,             KC_I,             KC_O,     KC_P,       BSPACE_OR_DEL,
+    ESCAPE_OR_NAV,   KC_Q,     KC_W,     KC_E,      KC_R,          KC_T,            KC_Y,          KC_U,             KC_I,             KC_O,     P_OR_DEL,   KC_BSPACE,
     TAB_OR_SYMBOLS,  KC_A,     KC_S,     KC_D,      F_OR_FUNCTION, KC_G,            KC_H,          J_OR_JUMP,        KC_K,             KC_L,     KC_SCOLON,  UK_QUOT,
     SHIFT_LAYER,     KC_Z,     KC_X,     KC_C,      KC_V,          KC_B,            N_OR_NUMBERS,  KC_M,             KC_COMMA,         KC_DOT,   KC_UP,      KC_ENTER,
     KC_LCTRL,        KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,      SPACE_OR_NAV,/**/XXXXXXX,       L_ROUND_BRACKET,  R_ROUND_BRACKET,  KC_LEFT,  KC_DOWN,    KC_RIGHT
@@ -53,10 +53,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_DELETE] = LAYOUT_planck_grid(
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_DELETE,  _______,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,
-    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  KC_DELETE,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 
   [_NAV] = LAYOUT_planck_grid(
