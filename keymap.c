@@ -21,7 +21,16 @@ enum planck_layers {
   _ADJUST,
 };
 
-#define ESCAPE_OR_NAV   LT(_NAV, KC_ESCAPE)
+//Tap Dance Declarations
+enum {
+  TD_ESCAPE_OR_NAV = 0
+};
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_ESCAPE_OR_NAV] = ACTION_TAP_DANCE_LAYER_MOVE(KC_ESCAPE, _NAV)
+};
+
+#define ESCAPE_OR_NAV   TD(TD_ESCAPE_OR_NAV)
 #define SPACE_OR_NAV    LT(_NAV, KC_SPACE)
 #define TAB_OR_SYMBOLS  LT(_SYMBOLS, KC_TAB)
 #define F_OR_FUNCTION   LT(_FUNCTION, KC_F)
@@ -29,6 +38,7 @@ enum planck_layers {
 #define N_OR_NUMBERS    LT(_NUMBERS, KC_N)
 #define P_OR_DEL        LT(_DELETE, KC_P)
 #define SHIFT_LAYER     LM(_SHIFT, MOD_LSFT)
+#define TO_BASE         TO(_BASE)
 
 #define L_ROUND_BRACKET     KC_LEFT_PAREN
 #define R_ROUND_BRACKET     KC_RIGHT_PAREN
@@ -61,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT_planck_grid(
     _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGUP,    KC_BSPACE,  KC_UP,    KC_DELETE,  XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGDOWN,  KC_LEFT,    KC_DOWN,  KC_RIGHT,   XXXXXXX,  XXXXXXX,
+    TO_BASE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGDOWN,  KC_LEFT,    KC_DOWN,  KC_RIGHT,   XXXXXXX,  XXXXXXX,
     _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,    KC_HOME,    XXXXXXX,  KC_END,     XXXXXXX,  XXXXXXX,
     _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,/**/XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
   ),
