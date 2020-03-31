@@ -104,10 +104,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NAV] = LAYOUT_planck_grid(
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGUP,    KC_BSPACE,  KC_UP,    KC_DELETE,  XXXXXXX,  XXXXXXX,
-    TO_BASE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    KC_PGDOWN,  KC_LEFT,    KC_DOWN,  KC_RIGHT,   XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,    KC_HOME,    XXXXXXX,  KC_END,     XXXXXXX,  XXXXXXX,
-    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,/**/XXXXXXX,    XXXXXXX,    XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_PGUP,    XXXXXXX,
+    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGDOWN,  KC_END
   ),
 
   [_SYMBOLS] = LAYOUT_planck_grid(
@@ -336,6 +336,7 @@ void rb_finished (qk_tap_dance_state_t *state, void *user_data) {
   rbtap_state.state = cur_dance(state);
   switch (rbtap_state.state) {
     case SINGLE_TAP: register_code(KC_LSFT); register_code(R_ROUND_BRACKET_UNSHIFTED); break;
+    case SINGLE_HOLD: layer_on(_NAV); break;
     case DOUBLE_TAP: register_code(R_SQUARE_BRACKET); break;
     case TRIPLE_TAP: register_code(KC_LSFT); register_code(R_SQUIGGLY_BRACKET_UNSHIFTED); break;
     //case DOUBLE_SINGLE_TAP: register_code(KC_X); unregister_code(KC_X); register_code(KC_X);
@@ -348,6 +349,7 @@ void rb_finished (qk_tap_dance_state_t *state, void *user_data) {
 void rb_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (rbtap_state.state) {
     case SINGLE_TAP: unregister_code(KC_LSFT); unregister_code(R_ROUND_BRACKET_UNSHIFTED); break;
+    case SINGLE_HOLD: layer_off(_NAV); break;
     case DOUBLE_TAP: unregister_code(R_SQUARE_BRACKET); break;
     case TRIPLE_TAP: unregister_code(KC_LSFT); unregister_code(R_SQUIGGLY_BRACKET_UNSHIFTED); break;
     //case DOUBLE_SINGLE_TAP: unregister_code(KC_X);
