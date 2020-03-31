@@ -52,6 +52,7 @@ enum planck_layers {
   _SYMBOLS,
   _NUMBERS,
   _JUMP,
+  _MOVE,
   _FUNCTION,
   _ADJUST,
 };
@@ -62,6 +63,7 @@ enum planck_layers {
 #define TAB_OR_SYMBOLS  LT(_SYMBOLS, KC_TAB)
 #define F_OR_FUNCTION   LT(_FUNCTION, KC_F)
 #define J_OR_JUMP       LT(_JUMP, KC_J)
+#define M_OR_MOVE       LT(_MOVE, KC_M)
 #define N_OR_NUMBERS    LT(_NUMBERS, KC_N)
 #define P_OR_DEL        LT(_DELETE, KC_P)
 #define SHIFT_LAYER     LM(_SHIFT, MOD_LSFT)
@@ -83,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
     ESCAPE_OR_NAV,   KC_Q,     KC_W,     KC_E,      KC_R,          KC_T,            KC_Y,          KC_U,       KC_I,       KC_O,     P_OR_DEL,   KC_BSPACE,
     TAB_OR_SYMBOLS,  KC_A,     KC_S,     KC_D,      F_OR_FUNCTION, KC_G,            KC_H,          J_OR_JUMP,  KC_K,       KC_L,     KC_SCOLON,  UK_QUOT,
-    SHIFT_LAYER,     KC_Z,     KC_X,     KC_C,      KC_V,          KC_B,            N_OR_NUMBERS,  KC_M,       KC_COMMA,   KC_DOT,   KC_UP,      KC_ENTER,
+    SHIFT_LAYER,     KC_Z,     KC_X,     KC_C,      KC_V,          KC_B,            N_OR_NUMBERS,  M_OR_MOVE,  KC_COMMA,   KC_DOT,   KC_UP,      KC_ENTER,
     KC_LCTRL,        KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,      SPACE_OR_NAV,/**/XXXXXXX,       TD(TD_LB),  TD(TD_RB),  KC_LEFT,  KC_DOWN,    KC_RIGHT
   ),
 
@@ -127,6 +129,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,     LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     LGUI(KC_4),  LGUI(KC_5),  LGUI(KC_6),
     _______,     LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,     LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),
     _______,     _______,     _______,     XXXXXXX,     XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,     XXXXXXX,     XXXXXXX
+  ),
+
+  [_MOVE] = LAYOUT_planck_grid(
+    LSFT(LGUI(KC_0)),  LSFT(LGUI(KC_1)),  LSFT(LGUI(KC_2)),  LSFT(LGUI(KC_3)),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  LSFT(LGUI(KC_0)),  LSFT(LGUI(KC_1)),  LSFT(LGUI(KC_2)),  LSFT(LGUI(KC_3)),
+    _______,           LSFT(LGUI(KC_4)),  LSFT(LGUI(KC_5)),  LSFT(LGUI(KC_6)),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,           LSFT(LGUI(KC_4)),  LSFT(LGUI(KC_5)),  LSFT(LGUI(KC_6)),
+    _______,           LSFT(LGUI(KC_7)),  LSFT(LGUI(KC_8)),  LSFT(LGUI(KC_9)),  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,           LSFT(LGUI(KC_7)),  LSFT(LGUI(KC_8)),  LSFT(LGUI(KC_9)),
+    _______,           _______,           _______,           XXXXXXX,           XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX
   ),
 
   [_FUNCTION] = LAYOUT_planck_grid(
