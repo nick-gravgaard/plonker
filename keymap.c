@@ -25,8 +25,7 @@ enum {
 
 //Tap dance enums
 enum {
-  TD_ESCAPE_OR_NAV = 0,
-  TD_LB,
+  TD_LB = 0,
   TD_RB
 };
 
@@ -47,7 +46,6 @@ enum planck_keycodes {
 enum planck_layers {
   _BASE,
   _SHIFT,
-  _DELETE,
   _NAV,
   _SYMBOLS,
   _NUMBERS,
@@ -58,16 +56,13 @@ enum planck_layers {
 };
 
 
-#define ESCAPE_OR_NAV   TD(TD_ESCAPE_OR_NAV)
-#define SPACE_OR_NAV    LT(_NAV, KC_SPACE)
+#define ESCAPE_OR_LGUI  MT(MOD_LGUI, KC_ESCAPE)
 #define TAB_OR_SYMBOLS  LT(_SYMBOLS, KC_TAB)
 #define F_OR_FUNCTION   LT(_FUNCTION, KC_F)
 #define J_OR_JUMP       LT(_JUMP, KC_J)
 #define M_OR_MOVE       LT(_MOVE, KC_M)
 #define N_OR_NUMBERS    LT(_NUMBERS, KC_N)
-#define P_OR_DEL        LT(_DELETE, KC_P)
 #define SHIFT_LAYER     LM(_SHIFT, MOD_LSFT)
-#define TO_BASE         TO(_BASE)
 
 #define L_ROUND_BRACKET     KC_LEFT_PAREN
 #define R_ROUND_BRACKET     KC_RIGHT_PAREN
@@ -83,38 +78,31 @@ enum planck_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-    ESCAPE_OR_NAV,   KC_Q,     KC_W,     KC_E,      KC_R,          KC_T,            KC_Y,          KC_U,       KC_I,       KC_O,     P_OR_DEL,   KC_BSPACE,
-    TAB_OR_SYMBOLS,  KC_A,     KC_S,     KC_D,      F_OR_FUNCTION, KC_G,            KC_H,          J_OR_JUMP,  KC_K,       KC_L,     KC_SCOLON,  UK_QUOT,
-    SHIFT_LAYER,     KC_Z,     KC_X,     KC_C,      KC_V,          KC_B,            N_OR_NUMBERS,  M_OR_MOVE,  KC_COMMA,   KC_DOT,   KC_UP,      KC_ENTER,
-    KC_LCTRL,        KC_LGUI,  KC_LALT,  KC_MINUS,  KC_EQUAL,      SPACE_OR_NAV,/**/XXXXXXX,       TD(TD_LB),  TD(TD_RB),  KC_LEFT,  KC_DOWN,    KC_RIGHT
+    ESCAPE_OR_LGUI,  KC_Q,     KC_W,     KC_E,      KC_R,          KC_T,        KC_Y,          KC_U,       KC_I,       KC_O,     KC_P,       KC_BSPACE,
+    TAB_OR_SYMBOLS,  KC_A,     KC_S,     KC_D,      F_OR_FUNCTION, KC_G,        KC_H,          J_OR_JUMP,  KC_K,       KC_L,     KC_SCOLON,  KC_DELETE,
+    SHIFT_LAYER,     KC_Z,     KC_X,     KC_C,      KC_V,          KC_B,        N_OR_NUMBERS,  M_OR_MOVE,  KC_COMMA,   KC_DOT,   KC_UP,      KC_ENTER,
+    KC_LCTRL,        KC_LALT,  UK_QUOT,  KC_MINUS,  KC_EQUAL,      KC_SPACE,/**/XXXXXXX,       TD(TD_LB),  TD(TD_RB),  KC_LEFT,  KC_DOWN,    KC_RIGHT
   ),
 
   [_SHIFT] = LAYOUT_planck_grid(
     _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  UK_DQUO,
     _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,/**/XXXXXXX,  L_SQUIGGLY_BRACKET,  R_SQUIGGLY_BRACKET,  _______,  _______,  _______
-  ),
-
-  [_DELETE] = LAYOUT_planck_grid(
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  KC_DELETE,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,             _______,             _______,  _______,  _______,
+    _______,  _______,  UK_DQUO,  _______,  _______,  _______,/**/XXXXXXX,  L_SQUIGGLY_BRACKET,  R_SQUIGGLY_BRACKET,  _______,  _______,  _______
   ),
 
   [_NAV] = LAYOUT_planck_grid(
     _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,
     _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,
     _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_PGUP,    XXXXXXX,
-    _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGDOWN,  KC_END
+    _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_HOME,  KC_PGDOWN,  KC_END
   ),
 
   [_SYMBOLS] = LAYOUT_planck_grid(
-    _______,  KC_QUESTION,  XXXXXXX,  KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,           UK_PIPE,           XXXXXXX,          KC_PERC,    XXXXXXX,
-    _______,  KC_AMPR,      KC_ASTR,  KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,           XXXXXXX,           UK_PND,           XXXXXXX,    KC_GRAVE,
-    _______,  XXXXXXX,      XXXXXXX,  KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,           KC_SLASH,          KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
-    _______,  _______,      _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        L_SQUARE_BRACKET,  R_SQUARE_BRACKET,  KC_HOME,          KC_PGDOWN,  KC_END
+    _______,  KC_QUESTION,  XXXXXXX,   KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,           UK_PIPE,           XXXXXXX,          KC_PERC,    XXXXXXX,
+    _______,  KC_AMPR,      KC_ASTR,   KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,           XXXXXXX,           UK_PND,           XXXXXXX,    XXXXXXX,
+    _______,  XXXXXXX,      XXXXXXX,   KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,           KC_SLASH,          KC_NONUS_BSLASH,  KC_PGUP,    XXXXXXX,
+    _______,  _______,      KC_GRAVE,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        L_SQUARE_BRACKET,  R_SQUARE_BRACKET,  KC_HOME,          KC_PGDOWN,  KC_END
   ),
 
   [_NUMBERS] = LAYOUT_planck_grid(
@@ -161,8 +149,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // define raise/lower layers so template code below works unchanged
-#define _LOWER _NAV
-#define _RAISE _SYMBOLS
+#define _LOWER _SYMBOLS
+#define _RAISE _SHIFT
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 
@@ -358,7 +346,6 @@ void rb_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_ESCAPE_OR_NAV] = ACTION_TAP_DANCE_LAYER_MOVE(KC_ESCAPE, _NAV),
-  [TD_LB]            = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lb_finished, lb_reset),
-  [TD_RB]            = ACTION_TAP_DANCE_FN_ADVANCED(NULL, rb_finished, rb_reset)
+  [TD_LB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lb_finished, lb_reset),
+  [TD_RB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, rb_finished, rb_reset)
 };
