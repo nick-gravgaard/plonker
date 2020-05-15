@@ -13,6 +13,6 @@
   See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
 #define ORYX_CONFIGURATOR
-#define PLANCK_EZ_LED_LOWER 4
+#define PLANCK_EZ_LED_LOWER 3
 #define PLANCK_EZ_LED_RAISE 1
-#define PLANCK_EZ_LED_ADJUST 5
+#define PLANCK_EZ_LED_ADJUST 4

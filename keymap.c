@@ -12,7 +12,6 @@ enum planck_keycodes {
 enum planck_layers {
   _BASE,
   _SHIFT,
-  _DELETE,
   _NAV,
   _SYMBOLS,
   _NUMBERS,
@@ -23,13 +22,13 @@ enum planck_layers {
 };
 
 #define ESCAPE_OR_LGUI  MT(MOD_LGUI, KC_ESCAPE)
+#define MINUS_OR_LALT   MT(MOD_LALT, KC_MINUS)
 #define TAB_OR_SYMBOLS  LT(_SYMBOLS, KC_TAB)
 #define F_OR_FUNCTION   LT(_FUNCTION, KC_F)
 #define J_OR_JUMP       LT(_JUMP, KC_J)
 #define M_OR_MOVE       LT(_MOVE, KC_M)
 #define N_OR_NUMBERS    LT(_NUMBERS, KC_N)
-#define P_OR_DEL        LT(_DELETE, KC_P)
-#define UKQUOT_OR_NAV   LT(_NAV, UK_QUOT)
+#define DOT_OR_NAV      LT(_NAV, KC_DOT)
 #define SHIFT_LAYER     LM(_SHIFT, MOD_LSFT)
 
 #define L_ROUND  KC_LEFT_PAREN
@@ -41,24 +40,17 @@ enum planck_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-    ESCAPE_OR_LGUI,  KC_Q,     KC_W,      KC_E,      KC_R,           KC_T,        KC_Y,          KC_U,       KC_I,           KC_O,     P_OR_DEL,  KC_BSPACE,
-    TAB_OR_SYMBOLS,  KC_A,     KC_S,      KC_D,      F_OR_FUNCTION,  KC_G,        KC_H,          J_OR_JUMP,  KC_K,           KC_L,     L_SQUAR,   R_SQUAR,
-    SHIFT_LAYER,     KC_Z,     KC_X,      KC_C,      KC_V,           KC_B,        N_OR_NUMBERS,  M_OR_MOVE,  KC_COMMA,       KC_DOT,   KC_UP,     KC_ENTER,
-    KC_LCTRL,        KC_LALT,  KC_SLASH,  KC_MINUS,  KC_EQUAL,       KC_SPACE,/**/XXXXXXX,       KC_SCOLON,  UKQUOT_OR_NAV,  KC_LEFT,  KC_DOWN,   KC_RIGHT
+    ESCAPE_OR_LGUI,  KC_Q,           KC_W,     KC_E,       KC_R,           KC_T,        KC_Y,          KC_U,       KC_I,        KC_O,       KC_P,     KC_ENTER,
+    TAB_OR_SYMBOLS,  KC_A,           KC_S,     KC_D,       F_OR_FUNCTION,  KC_G,        KC_H,          J_OR_JUMP,  KC_K,        KC_L,       L_SQUAR,  R_SQUAR,
+    SHIFT_LAYER,     KC_Z,           KC_X,     KC_C,       KC_V,           KC_B,        N_OR_NUMBERS,  M_OR_MOVE,  KC_SLASH,    KC_BSPACE,  KC_UP,    KC_DELETE,
+    KC_LCTRL,        MINUS_OR_LALT,  KC_EQUAL, KC_SCOLON,  UK_QUOT,        KC_SPACE,/**/XXXXXXX,       KC_COMMA,   DOT_OR_NAV,  KC_LEFT,    KC_DOWN,  KC_RIGHT
   ),
 
   [_SHIFT] = LAYOUT_planck_grid(
     _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,
     _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,
     _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,/**/XXXXXXX,  _______,  UK_DQUO,  _______,  _______,  _______
-  ),
-
-  [_DELETE] = LAYOUT_planck_grid(
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  KC_DELETE,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+    _______,  _______,  _______,  _______,  UK_DQUO,  _______,/**/XXXXXXX,  _______,  _______,  _______,  _______,  _______
   ),
 
   [_NAV] = LAYOUT_planck_grid(
@@ -69,10 +61,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SYMBOLS] = LAYOUT_planck_grid(
-    _______,  XXXXXXX,  XXXXXXX,          KC_EXLM,  XXXXXXX,  UK_TILD,    XXXXXXX,        XXXXXXX,  UK_PIPE,   XXXXXXX,  KC_PERC,    XXXXXXX,
-    _______,  KC_AMPR,  KC_ASTR,          KC_DLR,   XXXXXXX,  UK_AT,      KC_NONUS_HASH,  XXXXXXX,  XXXXXXX,   UK_PND,   L_ROUND,    R_ROUND,
-    _______,  XXXXXXX,  XXXXXXX,          KC_CIRC,  XXXXXXX,  XXXXXXX,    XXXXXXX,        XXXXXXX,  XXXXXXX,   XXXXXXX,  KC_PGUP,    XXXXXXX,
-    _______,  _______,  KC_NONUS_BSLASH,  XXXXXXX,  XXXXXXX,  XXXXXXX,/**/XXXXXXX,        XXXXXXX,  KC_GRAVE,  KC_HOME,  KC_PGDOWN,  KC_END
+    _______,  XXXXXXX,  XXXXXXX,  KC_EXLM,  XXXXXXX,   UK_TILD,    XXXXXXX,        XXXXXXX,  UK_PIPE,          XXXXXXX,  KC_PERC,    XXXXXXX,
+    _______,  KC_AMPR,  KC_ASTR,  KC_DLR,   XXXXXXX,   UK_AT,      KC_NONUS_HASH,  XXXXXXX,  XXXXXXX,          UK_PND,   L_ROUND,    R_ROUND,
+    _______,  XXXXXXX,  XXXXXXX,  KC_CIRC,  XXXXXXX,   XXXXXXX,    XXXXXXX,        XXXXXXX,  KC_NONUS_BSLASH,  XXXXXXX,  KC_PGUP,    XXXXXXX,
+    _______,  _______,  XXXXXXX,  XXXXXXX,  KC_GRAVE,  XXXXXXX,/**/XXXXXXX,        XXXXXXX,  KC_GRAVE,         KC_HOME,  KC_PGDOWN,  KC_END
   ),
 
   [_NUMBERS] = LAYOUT_planck_grid(
